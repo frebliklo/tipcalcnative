@@ -38,7 +38,7 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      amount: 40,
+      amount: null,
       tipPercent: 0.18,
       exchangeRate: 6.37 
     }
@@ -79,7 +79,7 @@ class App extends React.Component {
   render() {
     return (
       <ScrollWrapper>
-        <Input value={this.state.amount.toString()} onChangeText={this.onChangeText} />
+        <Input onChangeText={this.onChangeText} />
         {this.renderAmounts()}
       </ScrollWrapper>
     )
