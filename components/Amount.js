@@ -14,14 +14,14 @@ const styles = StyleSheet.create({
   },
   amount: {
     fontSize: 24,
-    color: '#FFFFFF'
+    color: 'rgb(255,255,255)'
   }
 })
 
 const Amount = ({ label, amount }) => (
   <View style={styles.container}>
     <Text style={styles.label}>{label}</Text>
-    <Text style={styles.amount}>$ {amount}</Text>
+    <Text textDecorationColor="#FFF" style={styles.amount}>$ {amount}</Text>
   </View>
 )
 

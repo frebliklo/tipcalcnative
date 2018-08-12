@@ -13,6 +13,19 @@ const { UIManager } = NativeModules
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 
+const springAnimationProperties = {
+  type: 'spring',
+  springDamping: 0.4,
+  property: 'opacity',
+}
+
+const animationConfig = {
+  duration: 1000,
+  create: springAnimationProperties,
+  update: springAnimationProperties,
+  delete: springAnimationProperties,
+}
+
 const styles = StyleSheet.create({
   amountContainer: {
     justifyContent: 'space-between',
@@ -31,7 +44,7 @@ class App extends React.Component {
   }
 
   onChangeText = num => {
-    LayoutAnimation.spring()
+    LayoutAnimation.configureNext(animationConfig)
     this.setState({ amount: formatNum(num) })
   }
 
