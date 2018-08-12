@@ -38,8 +38,9 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      amount: null,
-      tipPercent: 0.18
+      amount: 40,
+      tipPercent: 0.18,
+      exchangeRate: 6.37 
     }
   }
 
@@ -54,12 +55,16 @@ class App extends React.Component {
   }
 
   renderAmounts = () => {
-    const { amount, tipPercent } = this.state
+    const { amount, tipPercent, exchangeRate } = this.state
 
     if(amount) {
       return (
         <View style={styles.amountContainer}>
-          <Amounts amount={amount} tipPercent={tipPercent} />
+          <Amounts
+            amount={amount} 
+            tipPercent={tipPercent}
+            exchangeRate={exchangeRate}
+          />
           <TipSlider 
             value={tipPercent} 
             onValueChange={this.onValueChange}
@@ -74,7 +79,7 @@ class App extends React.Component {
   render() {
     return (
       <ScrollWrapper>
-        <Input value={this.state.amount} onChangeText={this.onChangeText} />
+        <Input value={this.state.amount.toString()} onChangeText={this.onChangeText} />
         {this.renderAmounts()}
       </ScrollWrapper>
     )

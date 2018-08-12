@@ -6,6 +6,13 @@
     "privacy": "public",
     "sdkVersion": "29.0.0",
     "platforms": ["ios", "android"],
+    "ios": {
+      "bundleIdentifier": "com.frebliklo.tipcalc",
+      "supportsTablet": true
+    },
+    "android": {
+      "package": "com.frebliklo.tipcalc"
+    },
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,9 +26,6 @@
     },
     "assetBundlePatterns": [
       "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    }
+    ]
   }
 }

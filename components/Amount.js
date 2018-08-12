@@ -8,6 +8,11 @@ const styles = StyleSheet.create({
     alignItems: 'baseline',
     marginVertical: 8
   },
+  amountContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'baseline'
+  },
   label: {
     fontSize: 16,
     color: '#FFFFFF'
@@ -15,13 +20,21 @@ const styles = StyleSheet.create({
   amount: {
     fontSize: 24,
     color: 'rgb(255,255,255)'
+  },
+  amountSecondary: {
+    fontSize: 14,
+    color: 'rgba(255,255,255,.8)',
+    marginRight: 8
   }
 })
 
-const Amount = ({ label, amount }) => (
+const Amount = ({ label, amount, amountDKK }) => (
   <View style={styles.container}>
     <Text style={styles.label}>{label}</Text>
-    <Text textDecorationColor="#FFF" style={styles.amount}>$ {amount}</Text>
+    <View style={styles.amountContainer}>
+      <Text style={styles.amountSecondary}>{amountDKK} DKK</Text>
+      <Text style={styles.amount}>$ {amount}</Text>
+    </View>
   </View>
 )
 
