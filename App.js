@@ -1,5 +1,5 @@
 import React from 'react'
-import { NativeModules, LayoutAnimation, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, Alert, NativeModules, LayoutAnimation, StyleSheet, Text, View } from 'react-native'
 
 import Amounts from './components/Amounts'
 import Input from './components/Input'
@@ -7,6 +7,8 @@ import ScrollWrapper from './components/ScrollWrapper'
 import TipSlider from './components/TipSlider'
 
 import { formatNum } from './utils/formatNum'
+
+import { CURRENCY_LAYER_API_KEY } from './keys'
 
 const { UIManager } = NativeModules
 
@@ -38,10 +40,30 @@ class App extends React.Component {
     super(props)
 
     this.state = {
+      isLoading: true,
       amount: null,
       tipPercent: 0.18,
-      exchangeRate: 6.37 
+      exchangeRate: 6.55 
     }
+  }
+
+  componentDidMount() {
+    return fetch(`http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`)
+      .then(response => response.json())
+      .then(responseJson => {
+        console.log(responseJson.quotes.USDDKK)
+        this.setState({ isLoading: false, exchangeRate: responseJson.quotes.USDDKK })
+      })
+      .catch(err => {
+        console.log(err)
+        Alert.alert(
+          'Problem fetching',
+          'Could not fetch fresh exchange rate;\n\n' + err + '\n\nThe fallback exchange rate still works, so you\'ll still get a rough estimate.',
+          [
+            { text: 'That sucks...', onPress: () => null, style: 'cancel' }
+          ],
+        )
+      })
   }
 
   onChangeText = num => {
@@ -52,6 +74,13 @@ class App extends React.Component {
   onValueChange = num => {
     const value = formatNum(num)
     this.setState({ tipPercent: value })
+  }
+
+  loadingIndicator = () => {
+    if(this.state.isLoading === true) {
+      return <ActivityIndicator />
+    }
+    return null
   }
 
   renderAmounts = () => {
@@ -81,6 +110,7 @@ class App extends React.Component {
       <ScrollWrapper>
         <Input onChangeText={this.onChangeText} />
         {this.renderAmounts()}
+        {this.loadingIndicator()}
       </ScrollWrapper>
     )
   }
