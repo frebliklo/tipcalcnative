@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "tipcalcnative",
-    "description": "This project is really great.",
+    "name": "TipCalc",
+    "description": "Calculate the tip you need to pay your for service in the US",
     "slug": "tipcalcnative",
     "privacy": "public",
     "sdkVersion": "29.0.0",
