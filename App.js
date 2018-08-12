@@ -32,6 +32,18 @@ const styles = StyleSheet.create({
   amountContainer: {
     justifyContent: 'space-between',
     width: '100%'
+  },
+  loadingContainer: {
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 32
+  },
+  loadingText: {
+    fontSize: 12,
+    textAlign: 'center',
+    color: '#FFF',
+    margin: 8
   }
 })
 
@@ -52,6 +64,7 @@ class App extends React.Component {
       .then(response => response.json())
       .then(responseJson => {
         console.log(responseJson.quotes.USDDKK)
+        LayoutAnimation.configureNext(animationConfig)
         this.setState({ isLoading: false, exchangeRate: responseJson.quotes.USDDKK })
       })
       .catch(err => {
@@ -78,7 +91,12 @@ class App extends React.Component {
 
   loadingIndicator = () => {
     if(this.state.isLoading === true) {
-      return <ActivityIndicator />
+      return (
+        <View styles={styles.loadingContainer}>
+          <ActivityIndicator size="small" color="#F5AF24" />
+          <Text style={styles.loadingText}>Fetching exchange rate...</Text>
+        </View>
+      )
     }
     return null
   }
