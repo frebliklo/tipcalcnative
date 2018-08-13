@@ -1,5 +1,5 @@
 import React from 'react'
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet, View } from 'react-native'
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo'
 
 const styles = StyleSheet.create({
@@ -37,7 +37,7 @@ const ScrollWrapper = ({ children }) => (
         style={styles.container}
         contentContainerStyle={styles.contentContainer}
         scrollEnabled={false}
-        >
+      >
         {children}
       </ScrollView>
     </LinearGradient>

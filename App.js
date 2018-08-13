@@ -1,11 +1,12 @@
 import React from 'react'
-import { ActivityIndicator, Alert, NativeModules, LayoutAnimation, StyleSheet, Text, View } from 'react-native'
+import { ActivityIndicator, NativeModules, NetInfo, LayoutAnimation, StyleSheet, Text, View } from 'react-native'
 
 import Amounts from './components/Amounts'
 import Input from './components/Input'
 import ScrollWrapper from './components/ScrollWrapper'
 import TipSlider from './components/TipSlider'
 
+import { fetchAlert } from './utils/alerts'
 import { formatNum } from './utils/formatNum'
 
 import { CURRENCY_LAYER_API_KEY } from './keys'
@@ -17,12 +18,12 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 
 const springAnimationProperties = {
   type: 'spring',
-  springDamping: 0.4,
+  springDamping: 0.85,
   property: 'opacity',
 }
 
-const animationConfig = {
-  duration: 1000,
+const CustomAnimationConfig = {
+  duration: 800,
   create: springAnimationProperties,
   update: springAnimationProperties,
   delete: springAnimationProperties,
@@ -60,27 +61,26 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    return fetch(`http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`)
-      .then(response => response.json())
-      .then(responseJson => {
-        console.log(responseJson.quotes.USDDKK)
-        LayoutAnimation.configureNext(animationConfig)
-        this.setState({ isLoading: false, exchangeRate: responseJson.quotes.USDDKK })
-      })
-      .catch(err => {
-        console.log(err)
-        Alert.alert(
-          'Problem fetching',
-          'Could not fetch fresh exchange rate;\n\n' + err + '\n\nThe fallback exchange rate still works, so you\'ll still get a rough estimate.',
-          [
-            { text: 'That sucks...', onPress: () => null, style: 'cancel' }
-          ],
-        )
-      })
+    NetInfo.getConnectionInfo().then((connectionInfo) => {
+      if(connectionInfo.type !== 'none') {
+        return fetch(`http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`)
+          .then(response => response.json())
+          .then(responseJson => {
+            LayoutAnimation.configureNext(CustomAnimationConfig)
+            this.setState({ isLoading: false, exchangeRate: responseJson.quotes.USDDKK })
+          })
+          .catch(err => {
+            fetchAlert(err)
+            this.this.setState({ isLoading: false })
+          })
+      } else {
+        this.setState({ isLoading: false })
+      }
+    })
   }
 
   onChangeText = num => {
-    LayoutAnimation.configureNext(animationConfig)
+    LayoutAnimation.configureNext(CustomAnimationConfig)
     this.setState({ amount: formatNum(num) })
   }
 
