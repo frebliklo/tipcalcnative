@@ -17,15 +17,19 @@ UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 
 const springAnimationProperties = {
-  type: 'spring',
-  springDamping: 0.85,
-  property: 'opacity',
+  type: LayoutAnimation.Types.spring,
+  property: LayoutAnimation.Properties.opacity,
+  springDamping: 0.85
 }
 
 const CustomAnimationConfig = {
   duration: 800,
   create: springAnimationProperties,
-  update: springAnimationProperties,
+  update: {
+    type: LayoutAnimation.Types.spring,
+    property: LayoutAnimation.Properties.scaleXY,
+    springDamping: 0.85
+  },
   delete: springAnimationProperties,
 }
 
