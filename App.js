@@ -3,6 +3,7 @@ import { ActivityIndicator, NativeModules, NetInfo, LayoutAnimation, StyleSheet,
 
 import Amounts from './components/Amounts'
 import Input from './components/Input'
+import Loading from './components/Loading'
 import ScrollWrapper from './components/ScrollWrapper'
 import TipSlider from './components/TipSlider'
 
@@ -37,18 +38,6 @@ const styles = StyleSheet.create({
   amountContainer: {
     justifyContent: 'space-between',
     width: '100%'
-  },
-  loadingContainer: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 32
-  },
-  loadingText: {
-    fontSize: 12,
-    textAlign: 'center',
-    color: '#FFF',
-    margin: 8
   }
 })
 
@@ -65,9 +54,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    const url = `http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`
+
     NetInfo.getConnectionInfo().then((connectionInfo) => {
       if(connectionInfo.type !== 'none') {
-        return fetch(`http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`)
+        return fetch(url)
           .then(response => response.json())
           .then(responseJson => {
             LayoutAnimation.configureNext(CustomAnimationConfig)
@@ -95,12 +86,7 @@ class App extends React.Component {
 
   loadingIndicator = () => {
     if(this.state.isLoading === true) {
-      return (
-        <View styles={styles.loadingContainer}>
-          <ActivityIndicator size="small" color="#F5AF24" />
-          <Text style={styles.loadingText}>Fetching exchange rate...</Text>
-        </View>
-      )
+      return <Loading>Fetching exchange rate...</Loading>
     }
     return null
   }
