@@ -4,25 +4,34 @@
     "description": "Calculate the tip you need to pay your for service in the US",
     "slug": "tipcalcnative",
     "privacy": "public",
+    "githubUrl": "https://github.com/frebliklo/tipcalcnative",
     "sdkVersion": "29.0.0",
     "platforms": ["ios", "android"],
     "ios": {
       "bundleIdentifier": "com.frebliklo.tipcalc",
-      "supportsTablet": true
+      "supportsTablet": false
     },
     "android": {
-      "package": "com.frebliklo.tipcalc"
+      "package": "com.frebliklo.tipcalc",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "permissions": []
     },
-    "version": "1.0.0",
+    "version": "1.0.1",
+    "primaryColor": "#151F8C",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/iconStandalone.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD",
+      "fallbackToCacheTimeout": 300000
     },
     "assetBundlePatterns": [
       "**/*"
