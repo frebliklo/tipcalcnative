@@ -19,7 +19,7 @@
       },
       "permissions": []
     },
-    "version": "1.0.1",
+    "version": "1.0.5",
     "primaryColor": "#151F8C",
     "orientation": "portrait",
     "icon": "./assets/iconStandalone.png",
