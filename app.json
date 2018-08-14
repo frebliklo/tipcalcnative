@@ -9,13 +9,15 @@
     "platforms": ["ios", "android"],
     "ios": {
       "bundleIdentifier": "com.frebliklo.tipcalc",
-      "supportsTablet": false
+      "supportsTablet": false,
+      "icon": "./assets/icon-ios.png"
     },
     "android": {
       "package": "com.frebliklo.tipcalc",
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon-white.png",
-        "backgroundColor": "#151F8C"
+        "backgroundColor": "#151F8C",
+        "backgroundImage": "./assets/adaptive-bg.png"
       },
       "permissions": []
     },
@@ -25,8 +27,8 @@
     "icon": "./assets/icon-color.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "resizeMode": "cover",
+      "backgroundColor": "#000000"
     },
     "updates": {
       "enabled": true,
