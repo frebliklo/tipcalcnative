@@ -14,15 +14,15 @@
     "android": {
       "package": "com.frebliklo.tipcalc",
       "adaptiveIcon": {
-        "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#FFFFFF"
+        "foregroundImage": "./assets/icon-white.png",
+        "backgroundColor": "#151F8C"
       },
       "permissions": []
     },
     "version": "1.0.5",
     "primaryColor": "#151F8C",
     "orientation": "portrait",
-    "icon": "./assets/iconStandalone.png",
+    "icon": "./assets/icon-color.png",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
