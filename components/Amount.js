@@ -15,14 +15,19 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 16,
+    lineHeight: 24,
     color: '#FFFFFF'
   },
   amount: {
     fontSize: 24,
+    lineHeight: 32,
+    textAlign: 'right',
     color: 'rgb(255,255,255)'
   },
   amountSecondary: {
     fontSize: 14,
+    lineHeight: 24,
+    textAlign: 'right',
     color: 'rgba(255,255,255,.8)',
     marginRight: 8
   }

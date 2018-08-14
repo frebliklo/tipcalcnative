@@ -9,7 +9,8 @@ const styles = StyleSheet.create({
   adjustText: {
     color: '#FFF',
     textAlign: 'center',
-    fontSize: 12
+    fontSize: 12,
+    lineHeight: 20
   },
   slider: {
     width: '100%',
@@ -19,6 +20,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     textAlign: 'center',
     fontSize: 16,
+    lineHeight: 24,
     fontWeight: '600'
   }
 })

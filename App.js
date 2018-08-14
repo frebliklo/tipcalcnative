@@ -1,5 +1,5 @@
 import React from 'react'
-import { ActivityIndicator, NativeModules, NetInfo, LayoutAnimation, StyleSheet, Text, View } from 'react-native'
+import { NativeModules, NetInfo, LayoutAnimation, StyleSheet, View } from 'react-native'
 
 import Amounts from './components/Amounts'
 import Input from './components/Input'
