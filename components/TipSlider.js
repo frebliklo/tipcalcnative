@@ -1,6 +1,8 @@
 import React from 'react'
 import { Slider, StyleSheet, Text, View } from 'react-native'
 
+import { colors } from '../constants/theme'
+
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     paddingVertical: 16
   },
   tipText: {
-    color: '#FFF',
+    color: colors.white,
     textAlign: 'center',
     fontSize: 16,
     lineHeight: 24,
@@ -32,8 +34,8 @@ const TipSlider = ({ value, onValueChange, tipPercent }) => (
       style={styles.slider}
       value={value}
       onValueChange={onValueChange}
-      thumbTintColor="#FFF"
-      minimumTrackTintColor="#F5AF24"
+      thumbTintColor={colors.white}
+      minimumTrackTintColor={colors.red['300']}
     />
     <Text style={styles.tipText}>{tipPercent} % tip</Text>
   </View>

@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
+import { colors } from '../constants/theme'
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -16,19 +18,20 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     lineHeight: 24,
-    color: '#FFFFFF'
+    color: colors.white
   },
   amount: {
     fontSize: 24,
     lineHeight: 32,
     textAlign: 'right',
-    color: 'rgb(255,255,255)'
+    color: colors.white
   },
   amountSecondary: {
     fontSize: 14,
     lineHeight: 24,
     textAlign: 'right',
-    color: 'rgba(255,255,255,.8)',
+    color: colors.white,
+    opacity: .8,
     marginRight: 8
   }
 })

@@ -28,8 +28,7 @@ const CustomAnimationConfig = {
   create: springAnimationProperties,
   update: {
     type: LayoutAnimation.Types.spring,
-    property: LayoutAnimation.Properties.scaleXY,
-    springDamping: 0.85
+    ...springAnimationProperties
   },
   delete: springAnimationProperties,
 }
@@ -42,17 +41,13 @@ const styles = StyleSheet.create({
 })
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      isLoading: true,
-      amount: null,
-      tipPercent: 0.18,
-      exchangeRate: 6.55 
-    }
+  state = {
+    isLoading: true,
+    amount: null,
+    tipPercent: 0.18,
+    exchangeRate: 6.55 
   }
-
+  
   componentDidMount() {
     const url = `http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`
 

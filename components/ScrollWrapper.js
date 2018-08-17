@@ -2,6 +2,8 @@ import React from 'react'
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo'
 
+import { colors } from '../constants/theme'
+
 const styles = StyleSheet.create({
   container: {
     flex: 1
@@ -29,7 +31,7 @@ const styles = StyleSheet.create({
 const ScrollWrapper = ({ children }) => (
   <SafeAreaView style={styles.safeArea}>
     <LinearGradient
-      colors={['#944AFC','#151F8C']}
+      colors={[colors.secondary,colors.primary]}
       style={styles.gradient}
     >
       <StatusBar barStyle="light-content" />

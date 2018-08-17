@@ -1,6 +1,8 @@
 import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 
+import { colors } from '../constants/theme'
+
 const styles = StyleSheet.create({
   textInput: {
     fontSize: 24,
@@ -8,12 +10,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingVertical: 16,
     paddingHorizontal: 32,
-    color: '#222',
-    backgroundColor: '#FFF',
+    color: colors.black,
+    backgroundColor: colors.white,
     borderRadius: 8,
     width: '100%',
     elevation: 5,
-    shadowColor: "#000",
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 3

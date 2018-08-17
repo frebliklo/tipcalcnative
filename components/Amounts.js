@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native'
 
 import Amount from './Amount'
 
+import { colors } from '../constants/theme'
 import { formatNum } from '../utils/formatNum'
 
 const styles = StyleSheet.create({
@@ -13,7 +14,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 3,
     borderWidth: 1,
-    borderColor: '#FFF',
+    borderColor: colors.white,
     borderRadius: 2,
     opacity: .15
   }
