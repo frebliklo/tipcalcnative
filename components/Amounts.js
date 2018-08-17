@@ -14,9 +14,9 @@ const styles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 3,
     borderWidth: 1,
-    borderColor: colors.white,
+    borderColor: colors.teal['200'],
     borderRadius: 2,
-    opacity: .15
+    opacity: .5
   }
 })
 

@@ -40,8 +40,8 @@ const Amount = ({ label, amount, amountDKK }) => (
   <View style={styles.container}>
     <Text style={styles.label}>{label}</Text>
     <View style={styles.amountContainer}>
-      <Text style={styles.amountSecondary}>{amountDKK} DKK</Text>
-      <Text style={styles.amount}>$ {amount}</Text>
+      <Text style={styles.amountSecondary}>{amountDKK.toFixed(2)} DKK</Text>
+      <Text style={styles.amount}>$ {amount.toFixed(2)}</Text>
     </View>
   </View>
 )

@@ -26,10 +26,7 @@ const springAnimationProperties = {
 const CustomAnimationConfig = {
   duration: 800,
   create: springAnimationProperties,
-  update: {
-    type: LayoutAnimation.Types.spring,
-    ...springAnimationProperties
-  },
+  update: springAnimationProperties,
   delete: springAnimationProperties,
 }
 
