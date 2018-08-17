@@ -1,7 +1,7 @@
 import React from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 
-import { colors } from '../constants/theme'
+import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({
   textInput: {
@@ -32,7 +32,7 @@ const InputAmount = ({ onChangeText }) => (
     placeholderTextColor="rgba(0,0,0,.6)"
     keyboardType="numeric"
     maxLength={6}
-    clearButtonMode="never"
+    clearButtonMode="always"
     underlineColorAndroid="rgba(0,0,0,0)"
     autoCorrect={false}
     onChangeText={onChangeText}

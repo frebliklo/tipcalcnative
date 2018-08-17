@@ -7,10 +7,10 @@ import Loading from './components/Loading'
 import ScrollWrapper from './components/ScrollWrapper'
 import TipSlider from './components/TipSlider'
 
-import { fetchAlert } from './utils/alerts'
-import { formatNum } from './utils/formatNum'
-
-import { CURRENCY_LAYER_API_KEY } from './keys'
+import { fetchAlert } from './resources/alerts'
+import { currenyLayerApi } from './resources/constants'
+import { formatNum } from './resources/formatNum'
+import { animation } from './resources/theme'
 
 const { UIManager } = NativeModules
 
@@ -20,11 +20,11 @@ UIManager.setLayoutAnimationEnabledExperimental &&
 const springAnimationProperties = {
   type: LayoutAnimation.Types.spring,
   property: LayoutAnimation.Properties.opacity,
-  springDamping: 0.85
+  springDamping: animation.springDamping
 }
 
 const CustomAnimationConfig = {
-  duration: 800,
+  duration: animation.springDuraion,
   create: springAnimationProperties,
   update: springAnimationProperties,
   delete: springAnimationProperties,
@@ -42,15 +42,13 @@ class App extends React.Component {
     isLoading: true,
     amount: null,
     tipPercent: 0.18,
-    exchangeRate: 6.55 
+    exchangeRate: 6.55
   }
   
   componentDidMount() {
-    const url = `http://www.apilayer.net/api/live?access_key=${CURRENCY_LAYER_API_KEY}&currencies=DKK`
-
     NetInfo.getConnectionInfo().then((connectionInfo) => {
       if(connectionInfo.type !== 'none') {
-        return fetch(url)
+        return fetch(currenyLayerApi)
           .then(response => response.json())
           .then(responseJson => {
             LayoutAnimation.configureNext(CustomAnimationConfig)

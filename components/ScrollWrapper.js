@@ -2,7 +2,7 @@ import React from 'react'
 import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
 import { LinearGradient } from 'expo'
 
-import { colors } from '../constants/theme'
+import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({
   container: {

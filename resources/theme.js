@@ -1,3 +1,8 @@
+export const animation = {
+  springDuraion: 800,
+  springDamping: 0.85
+}
+
 export const colors = {
   primary: '#151F8C',
   secondary: '#944AFC',

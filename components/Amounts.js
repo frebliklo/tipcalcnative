@@ -3,8 +3,8 @@ import { StyleSheet, View } from 'react-native'
 
 import Amount from './Amount'
 
-import { colors } from '../constants/theme'
-import { formatNum } from '../utils/formatNum'
+import { colors } from '../resources/theme'
+import { formatNum } from '../resources/formatNum'
 
 const styles = StyleSheet.create({
   container: {
@@ -30,18 +30,18 @@ const Amounts = ({ amount, tipPercent, exchangeRate }) => {
       <Amount 
         label="Amount"
         amount={numAmount} 
-        amountDKK={formatNum(numAmount*exchangeRate)} 
+        amountDKK={numAmount*exchangeRate}
       />
       <Amount 
         label="Tip"
         amount={tip} 
-        amountDKK={formatNum(tip*exchangeRate)} 
+        amountDKK={tip*exchangeRate}
       />
       <View style={styles.seperator} />
       <Amount 
         label="Total" 
         amount={total} 
-        amountDKK={formatNum(total*exchangeRate)} 
+        amountDKK={total*exchangeRate}
       />
     </View>
   )

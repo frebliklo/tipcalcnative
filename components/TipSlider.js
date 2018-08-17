@@ -1,7 +1,7 @@
 import React from 'react'
 import { Slider, StyleSheet, Text, View } from 'react-native'
 
-import { colors } from '../constants/theme'
+import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({
   container: {
