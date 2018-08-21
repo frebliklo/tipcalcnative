@@ -8,7 +8,7 @@ import ScrollWrapper from './components/ScrollWrapper'
 import TipSlider from './components/TipSlider'
 
 import { fetchAlert } from './resources/alerts'
-import { currenyLayerApi } from './resources/constants'
+import { usdExhangeRateEndpoint } from './resources/constants'
 import { formatNum } from './resources/formatNum'
 import { animation } from './resources/theme'
 
@@ -48,11 +48,15 @@ class App extends React.Component {
   componentDidMount() {
     NetInfo.getConnectionInfo().then((connectionInfo) => {
       if(connectionInfo.type !== 'none') {
-        return fetch(currenyLayerApi)
+        return fetch(usdExhangeRateEndpoint)
           .then(response => response.json())
-          .then(responseJson => {
+          .then(responrJson => {
+            const dkk = responrJson.currency.rates.find(rate => {
+              return rate.currency === 'DKK'
+            })
+
             LayoutAnimation.configureNext(CustomAnimationConfig)
-            this.setState({ isLoading: false, exchangeRate: responseJson.quotes.USDDKK })
+            this.setState({ isLoading: false, exchangeRate: dkk.rate })
           })
           .catch(err => {
             fetchAlert(err)

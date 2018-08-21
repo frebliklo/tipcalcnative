@@ -32,7 +32,7 @@ const InputAmount = ({ onChangeText }) => (
     placeholderTextColor="rgba(0,0,0,.6)"
     keyboardType="numeric"
     maxLength={6}
-    clearButtonMode="always"
+    clearButtonMode="never"
     underlineColorAndroid="rgba(0,0,0,0)"
     autoCorrect={false}
     onChangeText={onChangeText}
