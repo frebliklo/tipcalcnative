@@ -10,6 +10,7 @@ export const Context = createContext({
     secondary: 'DKK',
     exchangeRate: 6.5
   },
+  updateCurrency: currency => currency,
 })
 
 class App extends Component {
@@ -17,13 +18,25 @@ class App extends Component {
     super(props)
 
     this.setAmount = amount => {
-      this.setState({ amount })
+      if(amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+        this.setState({ amount })
+      }
+    }
+
+    this.updateCurrency = update => {
+      const updatedCurrency = { ...this.state.currency, ...update }
+      this.setState({ currency: updatedCurrency })
     }
 
     this.state = {
       amount: null,
       setAmount: this.setAmount,
-      exchangeRate: 6.5
+      currency: {
+        base: 'USD',
+        secondary: 'DKK',
+        exchangeRate: 6.5
+      },
+      updateCurrency: this.updateCurrency
     }
   }
 

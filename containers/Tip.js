@@ -67,7 +67,7 @@ class Tip extends Component {
     return (
       <ScrollWrapper>
         <Context.Consumer>
-          {({ amount, setAmount, exchangeRate }) => (
+          {({ amount, setAmount, currency }) => (
             <View>
               <Input
                 value={amount}
@@ -76,7 +76,7 @@ class Tip extends Component {
                   setAmount(e)
                 }}
               />
-              {amount ? this.renderAmounts(amount,exchangeRate) : null}
+              {amount ? this.renderAmounts(amount,currency.exchangeRate) : null}
             </View>
           )}
         </Context.Consumer>

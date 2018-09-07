@@ -30,7 +30,7 @@ class Sales extends Component {
     return (
       <ScrollWrapper>
         <Context.Consumer>
-          {({ amount, setAmount }) => (
+          {({ amount, setAmount, currency, updateCurrency }) => (
             <Input
               value={amount}
               onChangeText={e => {
