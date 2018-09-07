@@ -11,6 +11,7 @@ import { animation } from '../resources/theme'
 import { usdExhangeRateEndpoint } from '../resources/constants'
 import { fetchAlert } from '../resources/alerts'
 import { formatNum } from '../resources/formatNum'
+import { Context } from '../App';
 
 const { UIManager } = NativeModules
 
@@ -39,37 +40,7 @@ const styles = StyleSheet.create({
 
 class Tip extends Component {
   state = {
-    isLoading: true,
-    amount: null,
-    tipPercent: 0.18,
-    exchangeRate: 6.55
-  }
-
-  componentDidMount() {
-    NetInfo.getConnectionInfo().then(connectionInfo => {
-      if(connectionInfo.type !== 'none') {
-        return fetch()
-          .then(response => response.json())
-          .then(responseJson => {
-            const dkk = responseJson.currency.rates.find(rate => {
-              return rate.currency === 'DKK'
-            })
-
-            LayoutAnimation.configureNext(CustomAnimationConfig)
-            this.setState({ isLoading: false, exchangeRate: dkk.rate })
-          })
-          .catch(err => {
-            fetchAlert(err)
-            this.setState({ isLoading: false })
-          })
-      }
-      return this.setState({ isLoading: false })
-    })
-  }
-
-  handleChangeText = num => {
-    LayoutAnimation.configureNext(CustomAnimationConfig)
-    this.setState({ amount: formatNum(num) })
+    tipPercent: 0.18
   }
 
   handleValueChange = num => {
@@ -77,39 +48,38 @@ class Tip extends Component {
     this.setState({ tipPercent: value })
   }
 
-  renderLoading = () => {
-    if(this.state.isLoading) {
-      return <Loading>Getting latest exhange rate...</Loading>
-    }
-    return null
-  }
-
-  renderAmounts = () => {
-    const { amount, exchangeRate, tipPercent } = this.state
-    
-    if(amount) (
-      <View style={styles.amountContainer}>
-        <Amounts 
-          exchangeRate={exchangeRate}
-          tipPercent={tipPercent}
-          amount={amount}
-        />
-        <TipSlider
-          value={tipPercent}
-          onValueChange={this.handleValueChange}
-          tipPercent={formatNum(tipPercent*100)}
-        />
-      </View>
-    )
-    return null
-  }
+  renderAmounts = (amount, exchangeRate) => (
+    <View style={styles.amountContainer}>
+      <Amounts 
+        amount={amount}
+        exchangeRate={exchangeRate}
+        tipPercent={this.state.tipPercent}
+      />
+      <TipSlider
+        value={this.state.tipPercent}
+        onValueChange={this.handleValueChange}
+        tipPercent={formatNum(this.state.tipPercent*100)}
+      />
+    </View>
+  )
   
   render() {
     return (
       <ScrollWrapper>
-        <Input onChangeText={this.handleChangeText} />
-        {this.renderAmounts()}
-        {this.renderLoading()}
+        <Context.Consumer>
+          {({ amount, setAmount, exchangeRate }) => (
+            <View>
+              <Input
+                value={amount}
+                onChangeText={e => {
+                  LayoutAnimation.configureNext(CustomAnimationConfig)
+                  setAmount(e)
+                }}
+              />
+              {amount ? this.renderAmounts(amount,exchangeRate) : null}
+            </View>
+          )}
+        </Context.Consumer>
       </ScrollWrapper>
     )
   }

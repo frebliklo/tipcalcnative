@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const InputAmount = ({ onChangeText }) => (
-  <TextInput 
+const InputAmount = ({ onChangeText, value }) => (
+  <TextInput
+    value={value}
     style={styles.textInput}
     placeholder="Input amount"
     placeholderTextColor="rgba(0,0,0,.6)"
