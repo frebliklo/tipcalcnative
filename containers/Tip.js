@@ -66,8 +66,11 @@ class Tip extends Component {
     </View>
   )
 
-  handleQuery = updateCurrency =>  (
-    <Query query={GET_CURRENCY}>
+  handleQuery = (base, secondary, updateCurrency) =>  (
+    <Query 
+      query={GET_CURRENCY}
+      variables={{ base, secondary }}
+    >
       {({ loading, error, data }) => {
         if(loading) {
           LayoutAnimation.configureNext(CustomAnimationConfig)
@@ -77,7 +80,7 @@ class Tip extends Component {
           this.setState(() => ({ queryHandled: true }))
           return <FetchAlert err={error} />
         }
-
+        console.log(data)
         const { currency } = data
         const { exchangeRate } = currency
 
@@ -99,19 +102,23 @@ class Tip extends Component {
     return (
       <ScrollWrapper>
         <Context.Consumer>
-          {({ amount, setAmount, currency, updateCurrency }) => (
-            <View>
-              <Input
-                value={amount}
-                onChangeText={e => {
-                  LayoutAnimation.configureNext(CustomAnimationConfig)
-                  setAmount(e)
-                }}
-              />
-              {amount ? this.renderAmounts(amount,currency.exchangeRate) : null}
-              {!queryHandled ? this.handleQuery(updateCurrency) : null}
-            </View>
-          )}
+          {({ amount, setAmount, currency, updateCurrency }) => {
+            const { base, secondary, exchangeRate } = currency
+            
+            return(
+              <View>
+                <Input
+                  value={amount}
+                  onChangeText={e => {
+                    LayoutAnimation.configureNext(CustomAnimationConfig)
+                    setAmount(e)
+                  }}
+                />
+                {amount ? this.renderAmounts(amount, exchangeRate) : null}
+                {!queryHandled ? this.handleQuery(base, secondary, updateCurrency) : null}
+              </View>
+            )
+          }}
         </Context.Consumer>
       </ScrollWrapper>
     )

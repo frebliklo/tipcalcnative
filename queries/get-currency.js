@@ -1,10 +1,10 @@
 import { gql } from 'apollo-boost'
 
 const GET_CURRENCY = gql`
-  query getCurrency{
-    currency(source:"usd") {
+  query getCurrency($base: String!, $secondary: String!){
+    currency(source: $base) {
       source
-      exchangeRate(currency:"dkk") {
+      exchangeRate(currency: $secondary) {
         currency
         rate
       }
