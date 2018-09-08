@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NativeModules, LayoutAnimation, StyleSheet, View } from 'react-native'
+import { NativeModules, LayoutAnimation, View } from 'react-native'
 import { Query } from 'react-apollo'
 
 import { Context } from '../App'
@@ -33,13 +33,6 @@ const CustomAnimationConfig = {
   update: springAnimationProperties,
   delete: springAnimationProperties
 }
-
-const styles = StyleSheet.create({
-  amountContainer: {
-    justifyContent: 'space-between',
-    width: '100%'
-  }
-})
 
 class Tip extends Component {
   state = {
@@ -94,7 +87,7 @@ class Tip extends Component {
     const totalAmount = parseFloat(amount)+tipAmount
 
     return (
-      <View style={styles.amountContainer}>
+      <View style={{ justifyContent: 'space-between', width: '100%' }}>
         <View style={{ marginTop: 48 }}>
           <Amount label="Amount" amount={amount} />
           <Amount label="Tip" amount={tipAmount} />
