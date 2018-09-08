@@ -8,27 +8,18 @@ import Input from '../components/Input'
 import Seperator from '../components/Seperator'
 import ScrollWrapper from '../components/ScrollWrapper'
 
-import { animation } from '../resources/theme'
+import { CustomAnimationConfig } from '../resources/theme'
 
 const { UIManager } = NativeModules
 
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 
-  const springAnimationProperties = {
-    type: LayoutAnimation.Types.spring,
-    property: LayoutAnimation.Properties.opacity,
-    springDamping: animation.springDamping
-  }
-  
-  const CustomAnimationConfig = {
-    duration: animation.springDuraion,
-    create: springAnimationProperties,
-    update: springAnimationProperties,
-    delete: springAnimationProperties
+class Sales extends Component {
+  static navigationOptions = {
+    title: 'Sales'
   }
 
-class Sales extends Component {
   state = {
     salesTax: .08
   }
@@ -54,13 +45,13 @@ class Sales extends Component {
   
   render() {
     return (
-      <ScrollWrapper>
+      <ScrollWrapper title="Sales">
         <Context.Consumer>
           {({ amount, setAmount, currency }) => {
             const { base, secondary, exchangeRate } = currency
             
             return (
-              <View>
+              <View style={{ paddingHorizontal: 32 }}>
                 <Input
                   value={amount}
                   onChangeText={e => {

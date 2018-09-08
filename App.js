@@ -26,7 +26,7 @@ class App extends Component {
     super(props)
 
     this.setAmount = amount => {
-      if(amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
+      if(!amount || amount.match(/^\d{1,}(\.\d{0,2})?$/)) {
         this.setState({ amount })
       }
     }

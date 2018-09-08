@@ -1,5 +1,11 @@
 import React from 'react'
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native'
+import {
+  SafeAreaView,
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text
+} from 'react-native'
 import { LinearGradient } from 'expo'
 
 import { colors } from '../resources/theme'
@@ -10,8 +16,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    paddingTop: 20,
-    paddingHorizontal: 32,
     justifyContent: 'center'
   },
   gradient: {
@@ -25,16 +29,25 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'relative',
     backgroundColor: 'rgba(0,0,0,0)'
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '700',
+    lineHeight: 32,
+    color: colors.white,
+    marginTop: 40,
+    marginLeft: 32
   }
 })
 
-const ScrollWrapper = ({ children }) => (
+const ScrollWrapper = ({ children, title }) => (
   <SafeAreaView style={styles.safeArea}>
     <LinearGradient
       colors={[colors.secondary,colors.primary]}
       style={styles.gradient}
     >
       <StatusBar barStyle="light-content" />
+      <Text style={styles.title}>{title}</Text>
       <ScrollView
         style={styles.container}
         contentContainerStyle={styles.contentContainer}

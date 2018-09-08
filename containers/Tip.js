@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NativeModules, LayoutAnimation, View } from 'react-native'
+import { LayoutAnimation, NativeModules, View } from 'react-native'
 import { Query } from 'react-apollo'
 
 import { Context } from '../App'
@@ -13,7 +13,7 @@ import ScrollWrapper from '../components/ScrollWrapper'
 import Seperator from '../components/Seperator'
 import TipSlider from '../components/TipSlider'
 
-import { animation } from '../resources/theme'
+import { CustomAnimationConfig } from '../resources/theme'
 import { formatNum } from '../resources/formatNum'
 
 const { UIManager } = NativeModules
@@ -21,20 +21,11 @@ const { UIManager } = NativeModules
 UIManager.setLayoutAnimationEnabledExperimental &&
   UIManager.setLayoutAnimationEnabledExperimental(true)
 
-const springAnimationProperties = {
-  type: LayoutAnimation.Types.spring,
-  property: LayoutAnimation.Properties.opacity,
-  springDamping: animation.springDamping
-}
-
-const CustomAnimationConfig = {
-  duration: animation.springDuraion,
-  create: springAnimationProperties,
-  update: springAnimationProperties,
-  delete: springAnimationProperties
-}
-
 class Tip extends Component {
+  static navigationOptions = {
+    title: 'Tip'
+  }
+
   state = {
     tipPercent: 0.18,
     queryHandled: false
@@ -64,7 +55,6 @@ class Tip extends Component {
           return <FetchAlert err={error} />
         }
 
-        console.log(data)
         const { currency } = data
         const { exchangeRate } = currency
         
@@ -107,13 +97,13 @@ class Tip extends Component {
     const { queryHandled } = this.state
 
     return (
-      <ScrollWrapper>
+      <ScrollWrapper title="Tip">
         <Context.Consumer>
           {({ amount, setAmount, currency, updateCurrency }) => {
             const { base, secondary, exchangeRate } = currency
             
             return(
-              <View>
+              <View style={{ paddingHorizontal: 32 }}>
                 <Input
                   value={amount}
                   onChangeText={e => {

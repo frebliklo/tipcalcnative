@@ -1,6 +1,21 @@
+import { LayoutAnimation } from 'react-native'
+
 export const animation = {
   springDuraion: 800,
   springDamping: 0.85
+}
+
+const springAnimationProperties = {
+  type: LayoutAnimation.Types.spring,
+  property: LayoutAnimation.Properties.opacity,
+  springDamping: animation.springDamping
+}
+
+export const CustomAnimationConfig = {
+  duration: animation.springDuraion,
+  create: springAnimationProperties,
+  update: springAnimationProperties,
+  delete: springAnimationProperties
 }
 
 export const colors = {
