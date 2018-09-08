@@ -5,11 +5,12 @@ import { Query } from 'react-apollo'
 import { Context } from '../App'
 import GET_CURRENCY from '../queries/get-currency'
 
+import Amount from '../components/Amount'
 import Input from '../components/Input'
-import Amounts from '../components/Amounts'
 import FetchAlert from '../components/FetchAlert'
 import Loading from '../components/Loading'
 import ScrollWrapper from '../components/ScrollWrapper'
+import Seperator from '../components/Seperator'
 import TipSlider from '../components/TipSlider'
 
 import { animation } from '../resources/theme'
@@ -51,25 +52,14 @@ class Tip extends Component {
     this.setState({ tipPercent: value })
   }
 
-  renderAmounts = (amount, exchangeRate) => (
-    <View style={styles.amountContainer}>
-      <Amounts 
-        amount={amount}
-        exchangeRate={exchangeRate}
-        tipPercent={this.state.tipPercent}
-      />
-      <TipSlider
-        value={this.state.tipPercent}
-        onValueChange={this.handleValueChange}
-        tipPercent={formatNum(this.state.tipPercent*100)}
-      />
-    </View>
-  )
+  setErrorState = () => {
+    this.setState(() => ({ queryHandled: true }))
+  }
 
   handleQuery = (base, secondary, updateCurrency) =>  (
     <Query 
-      query={GET_CURRENCY}
-      variables={{ base, secondary }}
+    query={GET_CURRENCY}
+    variables={{ base, secondary }}
     >
       {({ loading, error, data }) => {
         if(loading) {
@@ -77,25 +67,49 @@ class Tip extends Component {
           return <Loading>Getting latest currency...</Loading>
         }
         if(error) {
-          this.setState(() => ({ queryHandled: true }))
+          this.setErrorState()
           return <FetchAlert err={error} />
         }
+
         console.log(data)
         const { currency } = data
         const { exchangeRate } = currency
-
+        
         updateCurrency({ 
           base: currency.source,
           secondary: exchangeRate.currency,
           exchangeRate: exchangeRate.rate
         })
-        this.setState(() => ({ queryHandled: true }))
+
+        this.setErrorState()
         LayoutAnimation.configureNext(CustomAnimationConfig)
         return null
       }}
     </Query>
   )
   
+  renderAmounts = amount => {
+    const { tipPercent } = this.state
+    const tipAmount = parseFloat(amount)*tipPercent
+    const totalAmount = parseFloat(amount)+tipAmount
+
+    return (
+      <View style={styles.amountContainer}>
+        <View style={{ marginTop: 48 }}>
+          <Amount label="Amount" amount={amount} />
+          <Amount label="Tip" amount={tipAmount} />
+          <Seperator />
+          <Amount label="Total" amount={totalAmount} />
+        </View>
+        <TipSlider
+          value={tipPercent}
+          onValueChange={this.handleValueChange}
+          tipPercent={formatNum(tipPercent*100)}
+        />
+      </View>
+    )
+  }
+
   render() {
     const { queryHandled } = this.state
 
