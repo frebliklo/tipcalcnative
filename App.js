@@ -1,6 +1,14 @@
 import React, { Component, createContext } from 'react'
+import ApolloClient, { InMemoryCache } from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
 
 import TabNavigator from './routes/TabNavigator'
+import { GRAPHQL_URI } from './constants'
+
+const client = new ApolloClient({
+  uri: GRAPHQL_URI,
+  cache: new InMemoryCache
+})
 
 export const Context = createContext({
   amount: null,
@@ -42,9 +50,11 @@ class App extends Component {
 
   render() {
     return (
-      <Context.Provider value={this.state}>
-        <TabNavigator />
-      </Context.Provider>
+      <ApolloProvider client={client}>
+        <Context.Provider value={this.state}>
+          <TabNavigator />
+        </Context.Provider>
+      </ApolloProvider>
     )
   }
 }

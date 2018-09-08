@@ -30,7 +30,7 @@ export default createBottomTabNavigator(
         } else if(routeName === 'Settings') {
           iconName = settingsIcon
         }
-        return <Image style={{ width: 28, height: 28, tintColor, marginBottom: 4 }} source={iconName} />
+        return <Image style={{ width: 28, height: 28, tintColor, paddingVertical: 6 }} source={iconName} />
       }
     }),
     tabBarOptions: {
@@ -38,12 +38,12 @@ export default createBottomTabNavigator(
       activeBackgroundColor: 'rgba(0,0,0,.05)',
       activeTintColor: colors.cyan['000'],
       inactiveTintColor: colors.indigo['300'],
-      pressColor: colors.cyan['000'],
+      pressColor: colors.cyan['800'],
       labelStyle: {
         fontSize: 14
       },
       style: {
-        backgroundColor: colors.primary
+        backgroundColor: colors.primary,
       }
     }
   }

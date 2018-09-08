@@ -1,17 +1,19 @@
 import React, { Component } from 'react'
-import { NativeModules, NetInfo, LayoutAnimation, StyleSheet, View } from 'react-native'
+import { NativeModules, LayoutAnimation, StyleSheet, View } from 'react-native'
+import { Query } from 'react-apollo'
+
+import { Context } from '../App'
+import GET_CURRENCY from '../queries/get-currency'
 
 import Input from '../components/Input'
 import Amounts from '../components/Amounts'
+import FetchAlert from '../components/FetchAlert'
 import Loading from '../components/Loading'
 import ScrollWrapper from '../components/ScrollWrapper'
 import TipSlider from '../components/TipSlider'
 
 import { animation } from '../resources/theme'
-import { usdExhangeRateEndpoint } from '../resources/constants'
-import { fetchAlert } from '../resources/alerts'
 import { formatNum } from '../resources/formatNum'
-import { Context } from '../App';
 
 const { UIManager } = NativeModules
 
@@ -40,7 +42,8 @@ const styles = StyleSheet.create({
 
 class Tip extends Component {
   state = {
-    tipPercent: 0.18
+    tipPercent: 0.18,
+    queryHandled: false
   }
 
   handleValueChange = num => {
@@ -62,12 +65,41 @@ class Tip extends Component {
       />
     </View>
   )
+
+  handleQuery = updateCurrency =>  (
+    <Query query={GET_CURRENCY}>
+      {({ loading, error, data }) => {
+        if(loading) {
+          LayoutAnimation.configureNext(CustomAnimationConfig)
+          return <Loading>Getting latest currency...</Loading>
+        }
+        if(error) {
+          this.setState(() => ({ queryHandled: true }))
+          return <FetchAlert err={error} />
+        }
+
+        const { currency } = data
+        const { exchangeRate } = currency
+
+        updateCurrency({ 
+          base: currency.source,
+          secondary: exchangeRate.currency,
+          exchangeRate: exchangeRate.rate
+        })
+        this.setState(() => ({ queryHandled: true }))
+        LayoutAnimation.configureNext(CustomAnimationConfig)
+        return null
+      }}
+    </Query>
+  )
   
   render() {
+    const { queryHandled } = this.state
+
     return (
       <ScrollWrapper>
         <Context.Consumer>
-          {({ amount, setAmount, currency }) => (
+          {({ amount, setAmount, currency, updateCurrency }) => (
             <View>
               <Input
                 value={amount}
@@ -77,6 +109,7 @@ class Tip extends Component {
                 }}
               />
               {amount ? this.renderAmounts(amount,currency.exchangeRate) : null}
+              {!queryHandled ? this.handleQuery(updateCurrency) : null}
             </View>
           )}
         </Context.Consumer>
