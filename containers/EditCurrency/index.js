@@ -30,8 +30,9 @@ const styles = StyleSheet.create({
     marginBottom: 24
   },
   error: {
-    fontSize: 24,
-    lineHeight: 32,
+    fontSize: 20,
+    lineHeight: 28,
+    textAlign: 'center',
     color: colors.red['200']
   }
 })
@@ -45,11 +46,13 @@ class EditCurrency extends Component {
     <Query query={GET_BASE_CURRENCIES} variables={{ secondary }}>
       {({ loading, error, data }) => {
         if(loading) return <Loading>Hold on...</Loading>
-        if(error) (
-          <Text style={styles.error}>
-            Can't find supported currencies :/
-          </Text>
-        )
+        if(error) {
+          return (
+            <Text style={[styles.error, styles.content]}>
+              Can't find supported currencies :/
+            </Text>
+          )
+        }
 
         const { currencies } = data
 
@@ -88,11 +91,13 @@ class EditCurrency extends Component {
     <Query query={GET_SECONDARY_CURRENCIES} variables={{ base }}>
       {({ loading, error, data }) => {
         if(loading) return <Loading>Hold on...</Loading>
-        if(error) (
-          <Text style={styles.error}>
-            Can't find supported currencies :/
-          </Text>
-        )
+        if(error) {
+          return (
+            <Text style={[styles.error, styles.content]}>
+              Can't find supported currencies :/
+            </Text>
+          )
+        }
 
         const { rates } = data.currency
         
