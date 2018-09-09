@@ -28,7 +28,8 @@ class Tip extends Component {
 
   state = {
     tipPercent: 0.18,
-    queryHandled: false
+    queryHandled: false,
+    amountsShown: false
   }
 
   handleValueChange = num => {
@@ -94,7 +95,7 @@ class Tip extends Component {
   }
 
   render() {
-    const { queryHandled } = this.state
+    const { queryHandled, amountsShown } = this.state
 
     return (
       <ScrollWrapper title="Tip">
@@ -107,7 +108,13 @@ class Tip extends Component {
                 <Input
                   value={amount}
                   onChangeText={e => {
-                    LayoutAnimation.configureNext(CustomAnimationConfig)
+                    if(!e) {
+                      LayoutAnimation.configureNext(CustomAnimationConfig)
+                      this.setState({ amountsShown: false })
+                    } else {
+                      this.setState({ amountsShown: true })
+                    }
+                    if(!amountsShown) { LayoutAnimation.configureNext(CustomAnimationConfig) }
                     setAmount(e)
                   }}
                 />

@@ -21,7 +21,8 @@ class Sales extends Component {
   }
 
   state = {
-    salesTax: .08
+    salesTax: .08,
+    amountsShown: false
   }
   
   renderAmounts = amount => {
@@ -44,6 +45,8 @@ class Sales extends Component {
   }
   
   render() {
+    const { amountsShown } = this.state
+
     return (
       <ScrollWrapper title="Sales">
         <Context.Consumer>
@@ -55,7 +58,13 @@ class Sales extends Component {
                 <Input
                   value={amount}
                   onChangeText={e => {
-                    LayoutAnimation.configureNext(CustomAnimationConfig)
+                    if(!e) {
+                      LayoutAnimation.configureNext(CustomAnimationConfig)
+                      this.setState({ amountsShown: false })
+                    } else {
+                      this.setState({ amountsShown: true })
+                    }
+                    if(!amountsShown) { LayoutAnimation.configureNext(CustomAnimationConfig) }
                     setAmount(e)
                   }}
                 />
