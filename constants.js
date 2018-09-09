@@ -9,4 +9,4 @@ if(process.env.NODE_ENV === 'development') {
 // export const GRAPHQL_URI = graphqlUri
 export const GRAPHQL_URI = 'https://api.lazytourist.xyz/graphql'
 
-export const APP_VERSION = '1.2.1'
+export const APP_VERSION = '1.3.0'
