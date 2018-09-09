@@ -4,7 +4,8 @@ import { createBottomTabNavigator } from 'react-navigation'
 
 import Tip from '../containers/Tip'
 import Sales from '../containers/Sales'
-import Settings from '../containers/Settings'
+
+import SettingsNavigator from '../routes/SettingsNavigator'
 
 import tipIcon from '../resources/assets/icons/tab-icon--tip.png'
 import salesIcon from '../resources/assets/icons/tab-icon--sales.png'
@@ -16,7 +17,7 @@ export default createBottomTabNavigator(
   {
     Tip,
     Sales,
-    Settings
+    Settings: SettingsNavigator
   },
   {
     navigationOptions: ({ navigation }) => ({

@@ -4,18 +4,20 @@ import {
   ScrollView,
   StatusBar,
   StyleSheet,
-  Text
+  Text,
+  View
 } from 'react-native'
 import { LinearGradient } from 'expo'
 
 import { colors } from '../resources/theme'
+import Header from './Header';
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flexGrow: 1
   },
   contentContainer: {
-    flex: 1,
+    flexGrow: 1,
     justifyContent: 'center'
   },
   gradient: {
@@ -28,7 +30,7 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     position: 'relative',
-    backgroundColor: 'rgba(0,0,0,0)'
+    backgroundColor: colors.primary
   },
   title: {
     fontSize: 24,
@@ -36,22 +38,25 @@ const styles = StyleSheet.create({
     lineHeight: 32,
     color: colors.white,
     marginTop: 40,
+    marginBottom: 16,
     marginLeft: 32
   }
 })
 
-const ScrollWrapper = ({ children, title }) => (
+const ScrollWrapper = ({ children, title, style, icon, iconPress }) => (
   <SafeAreaView style={styles.safeArea}>
     <LinearGradient
       colors={[colors.secondary,colors.primary]}
       style={styles.gradient}
     >
       <StatusBar barStyle="light-content" />
-      <Text style={styles.title}>{title}</Text>
+      <Header title={title} icon={icon} iconPress={iconPress} />
+      {/* <Text style={styles.title}>{title}</Text> */}
       <ScrollView
         style={styles.container}
-        contentContainerStyle={styles.contentContainer}
-        scrollEnabled={false}
+        contentContainerStyle={[styles.contentContainer, style]}
+        scrollEnabled={true}
+        overScrollMode="auto"
       >
         {children}
       </ScrollView>
