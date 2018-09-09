@@ -132,7 +132,7 @@ class Sales extends Component {
     
     return (
       <Query query={GET_LOCATION} variables={{ lat, lng }}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, client }) => {
           if(loading || !this.state.locationFound) {
             LayoutAnimation.configureNext(CustomAnimationConfig)
             return <Loading>Finding your location...</Loading>
@@ -146,6 +146,10 @@ class Sales extends Component {
           } else {
             currentLocation = `${state.longName}, ${country.shortName}`
           }
+
+          client.writeData({
+            data: { salesTax: { average: salesTax.average, __typename: 'SalesTax' } }
+          })
 
           LayoutAnimation.configureNext(CustomAnimationConfig)
 
@@ -195,7 +199,7 @@ class Sales extends Component {
                       this.handleValueChange(e, client)
                     }}
                   />
-                  {this.renderAmounts(input.value,salesTax)}
+                  {this.renderAmounts(input.value, salesTax)}
                 </View>
                 {this.renderLocation()}
               </View>
