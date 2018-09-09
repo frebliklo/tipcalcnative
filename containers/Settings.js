@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { Query } from 'react-apollo'
 
-import { Context } from '../App'
+import { GET_LOCAL_CURRENCY } from '../queries/get-local-state'
 
 import ListItem from '../components/ListItem'
 import ScrollWrapper from '../components/ScrollWrapper'
@@ -44,10 +45,10 @@ class Settings extends Component {
   render() {
     return (
       <ScrollWrapper title="Settings">
-        <Context.Consumer>
-          {({ currency }) => {
-            const { base, secondary } = currency
-
+        <Query query={GET_LOCAL_CURRENCY}>
+          {({ loading, error, data }) => {
+            const { base, secondary } = data.currencyLocal
+            
             return (
               <View style={{ flexGrow: 1 }}>
                 <Text style={[styles.content, styles.sectionHeadline]}>
@@ -70,7 +71,7 @@ class Settings extends Component {
               </View>
             )
           }}
-        </Context.Consumer>
+        </Query>
         <Text style={styles.appVersion}>{APP_VERSION}</Text>
       </ScrollWrapper>
     )

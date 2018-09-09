@@ -4,8 +4,8 @@ import { Query } from 'react-apollo'
 
 import GET_BASE_CURRENCIES from '../../queries/get-base-currencies'
 import GET_SECONDARY_CURRENCIES from '../../queries/get-secondary-currencies'
+import { GET_LOCAL_CURRENCY } from '../../queries/get-local-state'
 
-import { Context } from '../../App'
 import Loading from '../../components/Loading'
 import SelectItem from './SelectItem'
 import ScrollWrapper from '../../components/ScrollWrapper'
@@ -41,7 +41,7 @@ class EditCurrency extends Component {
     title: 'Edit currency'
   }
 
-  renderEditMain = (base, secondary, updateCurrency) => (
+  renderEditMain = (base, secondary, client) => (
     <Query query={GET_BASE_CURRENCIES} variables={{ secondary }}>
       {({ loading, error, data }) => {
         if(loading) return <Loading>Hold on...</Loading>
@@ -63,11 +63,16 @@ class EditCurrency extends Component {
                 source={source}
                 name={name}
                 selected={true}
-                onPress={() => updateCurrency({
-                  base: source,
-                  exchangeRate: exchangeRate.rate
-                })}
-              />
+                onPress={() => client.writeData({
+                  data: {
+                    currencyLocal: {
+                      base: source,
+                      exchangeRate: exchangeRate.rate,
+                      __typename: 'CurrencyLocal'
+                    }
+                  }
+                })
+              }/>
             )
           }
           return(
@@ -75,9 +80,14 @@ class EditCurrency extends Component {
               key={name}
               source={source}
               name={name}
-              onPress={() => updateCurrency({
-                base: source,
-                exchangeRate: exchangeRate.rate
+              onPress={() => client.writeData({
+                data: {
+                  currencyLocal: {
+                    base: source,
+                    exchangeRate: exchangeRate.rate,
+                    __typename: 'CurrencyLocal'
+                  }
+                }
               })}
             />
           )
@@ -86,7 +96,7 @@ class EditCurrency extends Component {
     </Query>
   )
 
-  renderEditSecondary = (base, secondary, updateCurrency) => (
+  renderEditSecondary = (base, secondary, client) => (
     <Query query={GET_SECONDARY_CURRENCIES} variables={{ base }}>
       {({ loading, error, data }) => {
         if(loading) return <Loading>Hold on...</Loading>
@@ -108,9 +118,14 @@ class EditCurrency extends Component {
                 source={rate.currency}
                 name={rate.name}
                 selected={true}
-                onPress={() => updateCurrency({
-                  secondary: rate.currency,
-                  exchangeRate: rate.rate
+                onPress={() => client.writeData({
+                  data: {
+                    currencyLocal: {
+                      secondary: rate.currency,
+                      exchangeRate: rate.rate,
+                      __typename: 'CurrencyLocal'
+                    }
+                  }
                 })}
               />
             )
@@ -120,9 +135,14 @@ class EditCurrency extends Component {
               key={rate.name}
               source={rate.currency}
               name={rate.name}
-              onPress={() => updateCurrency({
-                secondary: rate.currency,
-                exchangeRate: rate.rate
+              onPress={() => client.writeData({
+                data: {
+                  currencyLocal: {
+                    secondary: rate.currency,
+                    exchangeRate: rate.rate,
+                    __typename: 'CurrencyLocal'
+                  }
+                }
               })}
             />
           )
@@ -144,9 +164,9 @@ class EditCurrency extends Component {
         icon={require('../../assets/icons/arrow-back.png')}
         iconPress={() => this.props.navigation.goBack()}
       >
-        <Context.Consumer>
-          {({ currency, updateCurrency }) => {
-            const { base, secondary } = currency
+        <Query query={GET_LOCAL_CURRENCY}>
+          {({ loading, error, data, client }) => {
+            const { base, secondary } = data.currencyLocal
 
             return (
               <View>
@@ -158,14 +178,14 @@ class EditCurrency extends Component {
                 </Text>
                 <View style={{ flexGrow: 1 }}>
                   {editCurrency === 'main'
-                    ? this.renderEditMain(base, secondary, updateCurrency)
-                    : this.renderEditSecondary(base, secondary, updateCurrency)
+                    ? this.renderEditMain(base, secondary, client)
+                    : this.renderEditSecondary(base, secondary, client)
                   }
                 </View>
               </View>
             )
           }}
-        </Context.Consumer>
+        </Query>
       </ScrollWrapper>
     )
   }

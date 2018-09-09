@@ -5,7 +5,8 @@ import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
+    width: '100%',
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },

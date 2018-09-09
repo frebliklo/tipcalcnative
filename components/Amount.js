@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { Query } from 'react-apollo'
+
+import { GET_LOCAL_CURRENCY } from '../queries/get-local-state'
 
 import { colors } from '../resources/theme'
-import { Context } from '../App'
 
 const styles = StyleSheet.create({
   container: {
@@ -70,9 +72,9 @@ class Amount extends Component {
     const { label, amount } = this.props
     
     return (
-      <Context.Consumer>
-        {({ currency }) => {
-          const { base, secondary, exchangeRate } = currency
+      <Query query={GET_LOCAL_CURRENCY}>
+        {({ loading, error, data }) => {
+          const { base, secondary, exchangeRate } = data.currencyLocal
           const exchangeAmount = amount*exchangeRate
 
           return (
@@ -88,7 +90,7 @@ class Amount extends Component {
             </View>
           )
         }}
-      </Context.Consumer>
+      </Query>
     )
   }
 }
