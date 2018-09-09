@@ -7,9 +7,9 @@ import Sales from '../containers/Sales'
 
 import SettingsNavigator from '../routes/SettingsNavigator'
 
-import tipIcon from '../icons/tab-icon--tip.png'
-import salesIcon from '../icons/tab-icon--sales.png'
-import settingsIcon from '../icons/tab-icon--settings.png'
+import tipIcon from '../assets/tab-icon--tip.png'
+import salesIcon from '../assets/tab-icon--sales.png'
+import settingsIcon from '../assets/tab-icon--settings.png'
 
 import { colors } from '../resources/theme'
 
