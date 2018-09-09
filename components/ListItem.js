@@ -8,7 +8,6 @@ import {
 
 import Touchable from './Touchable/Highlight'
 
-import chevron from '../assets/chevron.png'
 import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({
@@ -56,7 +55,7 @@ const ListItem = ({ label, onPress, value }) => (
       <Text style={[styles.label, styles.text]}>{label}</Text>
       <View style={styles.row}>
         <Text style={[styles.value, styles.text]}>{value}</Text>
-        <Image style={styles.chevron} source={chevron} />
+        <Image style={styles.chevron} source={require('../assets/icons/chevron.png')} />
       </View>
     </View>
   </Touchable>

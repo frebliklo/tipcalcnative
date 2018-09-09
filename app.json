@@ -36,7 +36,8 @@
       "fallbackToCacheTimeout": 300000
     },
     "assetBundlePatterns": [
-      "assets/*"
+      "assets/*",
+      "assets/icons/*"
     ]
   }
 }

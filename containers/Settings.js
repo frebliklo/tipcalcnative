@@ -71,7 +71,7 @@ class Settings extends Component {
             )
           }}
         </Context.Consumer>
-        <Text style={styles.appVersion}>APP V ${APP_VERSION}</Text>
+        <Text style={styles.appVersion}>{APP_VERSION}</Text>
       </ScrollWrapper>
     )
   }

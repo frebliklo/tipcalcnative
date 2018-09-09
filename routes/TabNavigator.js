@@ -7,10 +7,6 @@ import Sales from '../containers/Sales'
 
 import SettingsNavigator from '../routes/SettingsNavigator'
 
-import tipIcon from '../assets/tab-icon--tip.png'
-import salesIcon from '../assets/tab-icon--sales.png'
-import settingsIcon from '../assets/tab-icon--settings.png'
-
 import { colors } from '../resources/theme'
 
 export default createBottomTabNavigator(
@@ -25,11 +21,11 @@ export default createBottomTabNavigator(
         const { routeName } = navigation.state
         let iconName
         if(routeName === 'Tip') {
-          iconName = tipIcon
+          iconName = require('../assets/icons/tab-icon--tip.png')
         } else if(routeName === 'Sales') {
-          iconName = salesIcon
+          iconName = require('../assets/icons/tab-icon--sales.png')
         } else if(routeName === 'Settings') {
-          iconName = settingsIcon
+          iconName = require('../assets/icons/tab-icon--settings.png')
         }
         return <Image style={{ width: 28, height: 28, tintColor, paddingVertical: 6 }} source={iconName} />
       }

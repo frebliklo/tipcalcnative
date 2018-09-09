@@ -10,7 +10,6 @@ import Loading from '../../components/Loading'
 import SelectItem from './SelectItem'
 import ScrollWrapper from '../../components/ScrollWrapper'
 
-import backArrow from '../../assets/arrow-back.png'
 import { colors } from '../../resources/theme'
 
 const styles = StyleSheet.create({
@@ -142,7 +141,7 @@ class EditCurrency extends Component {
       <ScrollWrapper
         title={title}
         style={styles.container}
-        icon={backArrow}
+        icon={require('../../assets/icons/arrow-back.png')}
         iconPress={() => this.props.navigation.goBack()}
       >
         <Context.Consumer>
