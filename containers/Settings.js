@@ -7,6 +7,7 @@ import ListItem from '../components/ListItem'
 import ScrollWrapper from '../components/ScrollWrapper'
 
 import { colors } from '../resources/theme'
+import { APP_VERSION } from '../constants'
 
 const styles = StyleSheet.create({
   content: {
@@ -70,7 +71,7 @@ class Settings extends Component {
             )
           }}
         </Context.Consumer>
-        <Text style={styles.appVersion}>APP V 1.2.0</Text>
+        <Text style={styles.appVersion}>APP V ${APP_VERSION}</Text>
       </ScrollWrapper>
     )
   }

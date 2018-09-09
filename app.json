@@ -21,7 +21,7 @@
       },
       "permissions": []
     },
-    "version": "1.2.0",
+    "version": "1.2.1",
     "primaryColor": "#151F8C",
     "orientation": "portrait",
     "icon": "./assets/icon-color.png",
@@ -36,7 +36,7 @@
       "fallbackToCacheTimeout": 300000
     },
     "assetBundlePatterns": [
-      "**/*"
+      "assets/*"
     ]
   }
 }

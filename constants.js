@@ -6,4 +6,6 @@ if(process.env.NODE_ENV === 'development') {
   graphqlUri = 'https://api.lazytourist.xyz/graphql'
 }
 
-export const GRAPHQL_URI = 'https://api.lazytourist.xyz/graphql'
+export const GRAPHQL_URI = graphqlUri
+
+export const APP_VERSION = '1.2.1'

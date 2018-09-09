@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableNativeFeedback, View } from 'react-native'
+import { Platform, TouchableNativeFeedback, View } from 'react-native'
 
 const AndroidWrapper = props => {
   const { style, children, useForeground, ...rest } = props
