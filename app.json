@@ -31,7 +31,7 @@
       "backgroundColor": "#000000"
     },
     "updates": {
-      "enabled": true,
+      "enabled": false,
       "checkAutomatically": "ON_LOAD",
       "fallbackToCacheTimeout": 300000
     },

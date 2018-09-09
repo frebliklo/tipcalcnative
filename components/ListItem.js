@@ -8,7 +8,7 @@ import {
 
 import Touchable from './Touchable/Highlight'
 
-import chevron from '../resources/assets/icons/chevron.png'
+import chevron from '../icons/chevron.png'
 import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({

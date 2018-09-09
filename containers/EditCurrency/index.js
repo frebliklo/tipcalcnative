@@ -10,7 +10,7 @@ import Loading from '../../components/Loading'
 import SelectItem from './SelectItem'
 import ScrollWrapper from '../../components/ScrollWrapper'
 
-import backArrow from '../../resources/assets/icons/arrow-back.png'
+import backArrow from '../../icons/arrow-back.png'
 import { colors } from '../../resources/theme'
 
 const styles = StyleSheet.create({
