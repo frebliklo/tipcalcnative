@@ -14,14 +14,18 @@
     },
     "android": {
       "package": "com.frebliklo.tipcalc",
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon-white.png",
         "backgroundColor": "#151F8C",
         "backgroundImage": "./assets/adaptive-bg.png"
       },
-      "permissions": []
+      "permissions": [
+        "ACCESS_COARSE_LOCATION",
+        "ACCESS_FINE_LOCATION"
+      ]
     },
-    "version": "1.2.1",
+    "version": "1.3.0",
     "primaryColor": "#151F8C",
     "orientation": "portrait",
     "icon": "./assets/icon-color.png",
