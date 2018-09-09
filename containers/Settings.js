@@ -9,9 +9,6 @@ import ScrollWrapper from '../components/ScrollWrapper'
 import { colors } from '../resources/theme'
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'flex-start'
-  },
   content: {
     marginHorizontal: 32
   },
@@ -22,6 +19,15 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     color: colors.white,
     opacity: .8
+  },
+  appVersion: {
+    fontSize: 12,
+    fontWeight: '700',
+    lineHeight: 16,
+    color: colors.white,
+    opacity: .6,
+    textAlign: 'center',
+    marginVertical: 16
   }
 })
 
@@ -36,16 +42,13 @@ class Settings extends Component {
   
   render() {
     return (
-      <ScrollWrapper
-        title="Settings"
-        style={styles.container}
-      >
+      <ScrollWrapper title="Settings">
         <Context.Consumer>
           {({ currency }) => {
             const { base, secondary } = currency
 
             return (
-              <View>
+              <View style={{ flexGrow: 1 }}>
                 <Text style={[styles.content, styles.sectionHeadline]}>
                   CURRENCY
                 </Text>
@@ -67,6 +70,7 @@ class Settings extends Component {
             )
           }}
         </Context.Consumer>
+        <Text style={styles.appVersion}>APP V 1.2.0</Text>
       </ScrollWrapper>
     )
   }
